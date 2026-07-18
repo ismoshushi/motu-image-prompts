@@ -1,0 +1,14 @@
+---
+const { prompt } = Astro.props;
+const title = prompt.titleZh || prompt.titleEn;
+const preview = prompt.promptZh || prompt.promptEn;
+---
+<article class="card" data-search={`${prompt.titleZh} ${prompt.titleEn} ${prompt.categoryLabelZh} ${prompt.styles.join(' ')} ${prompt.scenes.join(' ')}`.toLowerCase()} data-category={prompt.category}>
+  {prompt.imageUrl && <img src={prompt.imageUrl} alt={prompt.imageAltZh || prompt.imageAltEn || title} loading="lazy" referrerpolicy="no-referrer" />}
+  <div class="card-body">
+    <p class="eyebrow">{prompt.categoryLabelZh}</p>
+    <h2><a href={`/prompts/${prompt.slug}/`}>{title}</a></h2>
+    <p>{preview.slice(0, 118)}{preview.length > 118 ? '…' : ''}</p>
+    <div class="tags">{prompt.styles.slice(0, 3).map((tag) => <span>{tag}</span>)}</div>
+  </div>
+</article>

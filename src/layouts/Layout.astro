@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+const { title = 'Motu Image Prompts', description = '可搜索、可下载的中英双语 AI 生图提示词库' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">MOTU <span>IMAGE PROMPTS</span></a>
+      <nav>
+        <a href="/">提示词</a>
+        <a href="/prompts/product-photo/">产品图</a>
+        <a href="/categories/">分类</a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>
+      <p>提示词文本来自 <a href="https://www.heigeai.com/" rel="noopener">黑哥 AI</a>，按 MIT 许可证开放。图片仅远程引用原始来源。</p>
+    </footer>
+  </body>
+</html>

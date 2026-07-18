@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import dataset from '../../../data/prompts.json';
+
+export function getStaticPaths() {
+  return dataset.prompts.map((prompt) => ({ params: { slug: prompt.slug }, props: { prompt } }));
+}
+const { prompt } = Astro.props;
+const title = prompt.titleZh || prompt.titleEn;
+const description = prompt.promptZh || prompt.promptEn;
+---
+<Layout title={`${title} | Motu Image Prompts`} description={description.slice(0, 150)}>
+  <article class="detail wrap">
+    <a class="back" href="/">← 返回提示词库</a>
+    <div class="detail-head">
+      {prompt.imageUrl && <img src={prompt.imageUrl} alt={prompt.imageAltZh || prompt.imageAltEn || title} referrerpolicy="no-referrer" />}
+      <div>
+        <p class="eyebrow">{prompt.categoryLabelZh} · {prompt.categoryLabelEn}</p>
+        <h1>{title}</h1>
+        {prompt.titleZh && prompt.titleEn && <p class="title-en">{prompt.titleEn}</p>}
+        <div class="tags">{[...prompt.styles, ...prompt.scenes].map((tag) => <span>{tag}</span>)}</div>
+      </div>
+    </div>
+    {prompt.promptZh && <section class="prompt-block">
+      <div class="block-title"><h2>中文提示词</h2><button data-copy="zh">复制</button></div>
+      <pre id="prompt-zh">{prompt.promptZh}</pre>
+    </section>}
+    {prompt.promptEn && <section class="prompt-block">
+      <div class="block-title"><h2>English prompt</h2><button data-copy="en">Copy</button></div>
+      <pre id="prompt-en">{prompt.promptEn}</pre>
+    </section>}
+    {prompt.attribution && <p class="source">归属：{prompt.attribution}</p>}
+    {prompt.externalSourceUrl && <p class="source">外部来源：<a href={prompt.externalSourceUrl} rel="noopener">{prompt.externalSourceLabel || prompt.externalSourceUrl}</a></p>}
+    <p class="source">收录来源：<a href={prompt.sourceUrlZh || prompt.sourceUrlEn} rel="noopener">{prompt.sourceUrlZh || prompt.sourceUrlEn}</a></p>
+  </article>
+  <script>
+    for (const button of document.querySelectorAll('[data-copy]')) {
+      button.addEventListener('click', async () => {
+        const id = button.dataset.copy === 'zh' ? '#prompt-zh' : '#prompt-en';
+        await navigator.clipboard.writeText(document.querySelector(id).textContent);
+        const original = button.textContent;
+        button.textContent = '已复制';
+        setTimeout(() => button.textContent = original, 1200);
+      });
+    }
+  </script>
+</Layout>

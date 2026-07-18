@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import dataset from '../../../data/prompts.json';
+---
+<Layout title="提示词分类 | Motu Image Prompts">
+  <section class="hero wrap compact">
+    <p class="kicker">CATEGORIES</p>
+    <h1>按用途浏览。</h1>
+    <p>{dataset.categories.length} 个中文分类，共 {dataset.prompts.length} 条提示词。按收录案例数量从高到低排列。</p>
+  </section>
+  <section class="category-grid wrap">
+    {dataset.categories.map((category) => (
+      <a class="category-card" href={`/?category=${category.slug}`}>
+        <span>{category.count}</span>
+        <h2>{category.labelZh}</h2>
+        <p>{category.descriptionZh}</p>
+      </a>
+    ))}
+  </section>
+</Layout>

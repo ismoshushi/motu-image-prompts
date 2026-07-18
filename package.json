@@ -1,0 +1,24 @@
+{
+  "name": "motu-image-prompts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "sync": "node scripts/sync.mjs",
+    "validate": "node scripts/validate.mjs",
+    "build": "npm run validate && astro build",
+    "preview": "astro preview",
+    "deploy:cloudflare": "npm run build && wrangler pages deploy dist --project-name=motu-image-prompts"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.2.1",
+    "astro": "5.12.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.25.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

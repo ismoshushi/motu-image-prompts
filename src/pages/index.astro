@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PromptCard from '../components/PromptCard.astro';
+import dataset from '../../data/prompts.json';
+const prompts = dataset.prompts;
+---
+<Layout>
+  <section class="hero wrap">
+    <p class="kicker">OPEN PROMPT LIBRARY</p>
+    <h1>找到能直接出图的提示词。</h1>
+    <p>
+      共收录 {dataset.counts.prompts.toLocaleString('zh-CN')} 条 AI 生图提示词：黑哥 AI
+      {dataset.counts.sources.heigeai.toLocaleString('zh-CN')} 条双语案例，GPT-Image2-Skill
+      {dataset.counts.sources.gptImage2Skill.toLocaleString('zh-CN')} 条精选案例。可搜索、可复制、可下载、可部署。
+    </p>
+    <div class="search-row">
+      <input id="search" type="search" placeholder="搜索标题、分类、风格或场景…" autocomplete="off" />
+      <select id="category" aria-label="分类筛选">
+        <option value="">全部分类</option>
+        {dataset.categories.map((category) => <option value={category.slug}>{category.labelZh}（{category.count}）</option>)}
+      </select>
+    </div>
+    <p id="result-count" class="result-count">显示全部 {prompts.length} 条</p>
+  </section>
+  <section id="grid" class="grid wrap">
+    {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
+  </section>
+  <p id="empty" class="empty" hidden>没有找到匹配的提示词。</p>
+  <script>
+    const input = document.querySelector('#search');
+    const select = document.querySelector('#category');
+    const cards = [...document.querySelectorAll('.card')];
+    const count = document.querySelector('#result-count');
+    const empty = document.querySelector('#empty');
+    function filter() {
+      const query = input.value.trim().toLowerCase();
+      const category = select.value;
+      let visible = 0;
+      for (const card of cards) {
+        const match = (!query || card.dataset.search.includes(query)) && (!category || card.dataset.category === category);
+        card.hidden = !match;
+        if (match) visible++;
+      }
+      count.textContent = `找到 ${visible} 条提示词`;
+      empty.hidden = visible !== 0;
+    }
+    input.addEventListener('input', filter);
+    select.addEventListener('change', filter);
+    const initialCategory = new URLSearchParams(location.search).get('category');
+    if (initialCategory && [...select.options].some((option) => option.value === initialCategory)) {
+      select.value = initialCategory;
+      filter();
+    }
+  </script>
+</Layout>

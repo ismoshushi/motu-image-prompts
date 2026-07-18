@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PromptCard from '../../components/PromptCard.astro';
+import dataset from '../../../data/prompts.json';
+
+const prompts = dataset.prompts.filter((prompt) => prompt.sourceCategorySlug === 'product-shots' || prompt.sourceCategory === 'Product & Food');
+const category = { labelEn: 'Product Photography' };
+const tips = [
+  ['写清灯光位置', '说明主灯、补光和轮廓光从哪里照射，产品体积和边缘会更稳定。'],
+  ['指定真实表面', '使用哑光无缝背景、抛光混凝土、天然橡木等明确材质，避免模糊的灰色影棚。'],
+  ['锁定产品几何', '写明包装的形状、比例、开口和摆放角度，降低瓶身、盒体和圆形物件变形。'],
+  ['为文案保留空间', '制作横幅或商品主图时，直接指定左侧、右侧或顶部留白区域。'],
+];
+---
+<Layout
+  title="AI 产品图提示词 | Motu Image Prompts"
+  description={`收录 ${prompts.length} 条中英双语 AI 产品摄影提示词，覆盖棚拍、包装、静物和生活方式产品图。`}
+>
+  <section class="hero wrap collection-hero">
+    <p class="kicker">PRODUCT PHOTOGRAPHY</p>
+    <h1>不用进影棚，也能做产品图。</h1>
+    <p>
+      {prompts.length} 条可直接复制的中英双语产品摄影提示词，覆盖护肤、数码、家居、包装、静物和生活方式场景。
+      每条案例都保留完整构图、灯光、镜头、材质和背景描述。
+    </p>
+    <div class="collection-actions">
+      <a class="primary-action" href="#cases">浏览全部案例</a>
+      <a class="secondary-action" href="/?category=product-shots">在搜索库中筛选</a>
+    </div>
+  </section>
+
+  <section class="guide wrap">
+    <div class="section-heading">
+      <p class="kicker">STUDIO NOTES</p>
+      <h2>产品图更稳定的四个写法</h2>
+    </div>
+    <div class="guide-grid">
+      {tips.map(([title, description], index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="cases" class="collection-list wrap">
+    <div class="section-heading collection-title">
+      <div>
+        <p class="kicker">{category?.labelEn}</p>
+        <h2>全部产品摄影案例</h2>
+      </div>
+      <p>{prompts.length} 条</p>
+    </div>
+    <div class="grid collection-grid">
+      {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
+    </div>
+  </section>
+</Layout>
