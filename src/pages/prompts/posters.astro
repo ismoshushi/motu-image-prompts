@@ -1,0 +1,23 @@
+---
+import CollectionLanding from '../../components/CollectionLanding.astro';
+import dataset from '../../../data/prompts.json';
+
+const prompts = dataset.prompts.filter((prompt) =>
+  prompt.sourceCategorySlug === 'posters' || prompt.sourceCategory === 'Typography & Posters'
+);
+const tips = [
+  ['先确定信息层级', '把主标题、副标题、时间地点和行动按钮按重要性写清楚。'],
+  ['文字必须加引号', '需要准确出现在画面中的文案使用引号，并限制字体数量和字数。'],
+  ['锁定版式骨架', '说明网格、对齐方式、留白区域和主视觉占比，避免元素随机堆叠。'],
+  ['明确印刷质感', '按需要指定丝网印刷、胶印颗粒、撕纸拼贴、瑞士排版或电影海报质感。'],
+];
+---
+<CollectionLanding
+  prompts={prompts}
+  title="把信息做成一眼能看懂的海报。"
+  eyebrow="POSTERS & EDITORIAL"
+  description={`${prompts.length} 条海报与编辑设计提示词，覆盖活动、电影、品牌发布、音乐、展览、复古印刷和字体主视觉。`}
+  categoryLabel="海报与编辑设计"
+  searchCategory="brand-commercial"
+  tips={tips}
+/>

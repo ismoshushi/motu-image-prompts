@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PromptCard from './PromptCard.astro';
+
+const {
+  prompts,
+  title,
+  eyebrow,
+  description,
+  categoryLabel,
+  tips,
+  searchCategory,
+} = Astro.props;
+---
+<Layout title={`${title} | Motu Image Prompts`} description={description}>
+  <section class="hero wrap collection-hero">
+    <p class="kicker">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <div class="collection-actions">
+      <a class="primary-action" href="#cases">浏览全部案例</a>
+      <a class="secondary-action" href={`/?category=${searchCategory}`}>在搜索库中筛选</a>
+    </div>
+  </section>
+
+  <section class="guide wrap">
+    <div class="section-heading">
+      <p class="kicker">PROMPT NOTES</p>
+      <h2>生成效果更稳定的四个写法</h2>
+    </div>
+    <div class="guide-grid">
+      {tips.map(([tipTitle, tipDescription], index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{tipTitle}</h3>
+          <p>{tipDescription}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="cases" class="collection-list wrap">
+    <div class="section-heading collection-title">
+      <div>
+        <p class="kicker">{categoryLabel}</p>
+        <h2>全部案例</h2>
+      </div>
+      <p>{prompts.length} 条</p>
+    </div>
+    <div class="grid collection-grid">
+      {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
+    </div>
+  </section>
+</Layout>

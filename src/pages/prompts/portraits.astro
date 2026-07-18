@@ -1,0 +1,24 @@
+---
+import CollectionLanding from '../../components/CollectionLanding.astro';
+import dataset from '../../../data/prompts.json';
+
+const importedCategories = new Set(['Photography', 'Beauty & Lifestyle', 'Screen Photography']);
+const prompts = dataset.prompts.filter((prompt) =>
+  prompt.sourceCategorySlug === 'photography-portraits' || importedCategories.has(prompt.sourceCategory)
+);
+const tips = [
+  ['明确人物与视角', '写清人数、年龄范围、机位高度、景别和人物面对镜头的方向。'],
+  ['描述真实光线', '指定窗光、伦勃朗光、轮廓光或黄金时刻，避免只写“高级灯光”。'],
+  ['控制皮肤与手部', '要求保留自然皮肤纹理、真实手指和符合动作逻辑的肢体比例。'],
+  ['锁定服装和背景', '分别描述服装材质、主色、背景空间和景深，减少主体与环境互相污染。'],
+];
+---
+<CollectionLanding
+  prompts={prompts}
+  title="让人物看起来真实，而不是模板脸。"
+  eyebrow="PORTRAIT PHOTOGRAPHY"
+  description={`${prompts.length} 条人像摄影提示词，覆盖棚拍头像、环境人像、时尚人物、美妆、生活方式和电影感肖像。`}
+  categoryLabel="人像摄影"
+  searchCategory="portrait-fashion"
+  tips={tips}
+/>

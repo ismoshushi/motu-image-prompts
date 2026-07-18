@@ -1,0 +1,23 @@
+---
+import CollectionLanding from '../../components/CollectionLanding.astro';
+import dataset from '../../../data/prompts.json';
+
+const prompts = dataset.prompts.filter((prompt) =>
+  prompt.sourceCategorySlug === 'anime-manga' || prompt.sourceCategory === 'Anime & Manga'
+);
+const tips = [
+  ['确定作品形态', '先说明是动画剧照、漫画分镜、角色设定、封面还是连续故事页。'],
+  ['统一角色特征', '固定发型、服装、配色、年龄和标志性道具，避免角色在不同画格中漂移。'],
+  ['写清镜头语言', '指定近景、广角、俯拍、速度线、景深和动作方向，让画面具有叙事节奏。'],
+  ['限制风格冲突', '选择赛璐璐、少女漫画、青年漫画、水墨漫画等一个主要方向，避免混杂过多画风。'],
+];
+---
+<CollectionLanding
+  prompts={prompts}
+  title="从角色设定到完整漫画分镜。"
+  eyebrow="ANIME & MANGA"
+  description={`${prompts.length} 条动漫与漫画提示词，覆盖动画剧照、漫画分镜、角色设计、封面、四格漫画和不同地区漫画风格。`}
+  categoryLabel="动漫与漫画"
+  searchCategory="illustration-anime"
+  tips={tips}
+/>
