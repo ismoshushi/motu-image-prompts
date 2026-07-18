@@ -30,9 +30,10 @@ Git 集成配置：
 
 - Build command: `npm run build`
 - Build output directory: `dist`
+- Root directory: `/`
 - Node.js: 20 或更新版本
 
-仓库的 `wrangler.jsonc` 也已经声明相同的构建命令和输出目录，支持 Cloudflare 读取仓库配置自动构建。
+注意：Cloudflare Pages 目前只会从 `wrangler.jsonc` 读取输出目录，不会读取 Git 部署的 Build command。必须在 Cloudflare Dashboard 的项目 Build Settings 中填写 `npm run build`；否则 Cloudflare 会跳过构建并提示找不到 `dist`。
 
 也可以使用命令行：
 
