@@ -32,6 +32,8 @@ Git 集成配置：
 - Build output directory: `dist`
 - Node.js: 20 或更新版本
 
+仓库的 `wrangler.jsonc` 也已经声明相同的构建命令和输出目录，支持 Cloudflare 读取仓库配置自动构建。
+
 也可以使用命令行：
 
 ```bash
