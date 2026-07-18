@@ -13,6 +13,21 @@
   --shadow: 0 10px 34px rgba(24, 24, 31, 0.07);
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0d0f;
+  --surface: #15191d;
+  --soft: #20262b;
+  --soft-pink: #202a17;
+  --text: #f3f5f7;
+  --muted: #9ba4ad;
+  --line: #293038;
+  --line-strong: #39434d;
+  --accent: #b8ff31;
+  --accent-dark: #9de51b;
+  --shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
+}
+
 * { box-sizing: border-box; }
 
 html {
@@ -61,6 +76,36 @@ nav a {
   transition: color .2s ease, background .2s ease;
 }
 nav a:hover { color: var(--text); background: var(--soft); }
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: 2px;
+  padding: 0;
+  color: var(--muted);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--line-strong); }
+.theme-toggle .moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .moon { display: inline; }
+
+:root[data-theme="dark"] .site-header { background: rgba(11, 13, 15, 0.88); border-bottom-color: var(--line); }
+:root[data-theme="dark"] nav a { color: var(--muted); }
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus { background: var(--surface); border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184, 255, 49, 0.12); }
+:root[data-theme="dark"] .result-count { color: var(--muted) !important; }
+:root[data-theme="dark"] .card { box-shadow: none; }
+:root[data-theme="dark"] .card:hover { border-color: var(--accent); }
+:root[data-theme="dark"] .tags span { color: var(--muted); border: 1px solid var(--line); }
+:root[data-theme="dark"] pre { color: #d9dee3; }
+:root[data-theme="dark"] .category-card:hover { border-color: var(--accent); }
+:root[data-theme="dark"] .secondary-action { color: var(--muted); }
 
 .hero { padding: 76px 0 38px; text-align: center; }
 .hero.compact { padding-bottom: 26px; }

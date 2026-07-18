@@ -9,6 +9,12 @@ const { title = 'Motu Image Prompts', description = '可搜索、可下载的中
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -20,11 +26,38 @@ const { title = 'Motu Image Prompts', description = '可搜索、可下载的中
         <a href="/prompts/posters/">海报</a>
         <a href="/prompts/anime/">动漫</a>
         <a href="/categories/">分类</a>
+        <button class="theme-toggle" type="button" aria-label="切换到夜色模式" title="切换到夜色模式">
+          <span class="sun" aria-hidden="true">☾</span>
+          <span class="moon" aria-hidden="true">☀</span>
+        </button>
       </nav>
     </header>
     <main><slot /></main>
     <footer>
       <p>提示词文本来自 <a href="https://www.heigeai.com/" rel="noopener">黑哥 AI</a>，按 MIT 许可证开放。图片仅远程引用原始来源。</p>
     </footer>
+    <script is:inline>
+      const themeToggle = document.querySelector('.theme-toggle');
+      const updateThemeButton = () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        const label = isDark ? '切换到浅色模式' : '切换到夜色模式';
+        themeToggle?.setAttribute('aria-label', label);
+        themeToggle?.setAttribute('title', label);
+      };
+
+      themeToggle?.addEventListener('click', () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        if (isDark) {
+          delete document.documentElement.dataset.theme;
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.dataset.theme = 'dark';
+          localStorage.setItem('theme', 'dark');
+        }
+        updateThemeButton();
+      });
+
+      updateThemeButton();
+    </script>
   </body>
 </html>
