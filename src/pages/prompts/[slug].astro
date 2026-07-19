@@ -8,6 +8,7 @@ export function getStaticPaths() {
 const { prompt } = Astro.props;
 const title = prompt.titleZh || prompt.titleEn;
 const description = prompt.promptZh || prompt.promptEn;
+const showSource = !prompt.hideSource && !prompt.id?.startsWith('case-');
 ---
 <Layout title={`${title} | Motu Image Prompts`} description={description.slice(0, 150)}>
   <article class="detail wrap">
@@ -29,9 +30,9 @@ const description = prompt.promptZh || prompt.promptEn;
       <div class="block-title"><h2>English prompt</h2><button data-copy="en">Copy</button></div>
       <pre id="prompt-en">{prompt.promptEn}</pre>
     </section>}
-    {prompt.attribution && <p class="source">归属：{prompt.attribution}</p>}
-    {prompt.externalSourceUrl && <p class="source">外部来源：<a href={prompt.externalSourceUrl} rel="noopener">{prompt.externalSourceLabel || prompt.externalSourceUrl}</a></p>}
-    <p class="source">收录来源：<a href={prompt.sourceUrlZh || prompt.sourceUrlEn} rel="noopener">{prompt.sourceUrlZh || prompt.sourceUrlEn}</a></p>
+    {showSource && prompt.attribution && <p class="source">归属：{prompt.attribution}</p>}
+    {showSource && prompt.externalSourceUrl && <p class="source">外部来源：<a href={prompt.externalSourceUrl} rel="noopener">{prompt.externalSourceLabel || prompt.externalSourceUrl}</a></p>}
+    {showSource && <p class="source">收录来源：<a href={prompt.sourceUrlZh || prompt.sourceUrlEn} rel="noopener">{prompt.sourceUrlZh || prompt.sourceUrlEn}</a></p>}
   </article>
   <script>
     for (const button of document.querySelectorAll('[data-copy]')) {

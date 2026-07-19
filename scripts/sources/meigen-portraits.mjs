@@ -96,6 +96,7 @@ const entries = [
 export const meigenPortraitPrompts = entries.map((entry, index) => {
   const sourceUrl = `https://www.meigen.ai/prompt/${entry.id}`;
   const prompt = entry.promptEn || entry.promptZh;
+  const imageExtension = (entry.imageUrl || '').includes('.png') ? 'png' : 'jpg';
   return {
     id: `meigen-portrait-${index + 1}`,
     slug: `meigen-${entry.id}`,
@@ -107,16 +108,17 @@ export const meigenPortraitPrompts = entries.map((entry, index) => {
     promptZh: entry.promptZh || '',
     promptEn: entry.promptEn || '',
     promptHash: createHash('sha256').update(prompt.replace(/\s+/g, ' ').trim().toLowerCase()).digest('hex'),
-    imageUrl: entry.imageUrl || `https://images.meigen.ai/tweets/${entry.id}/0.jpg`,
+    imageUrl: `/images/meigen/meigen-${entry.id}.${imageExtension}`,
     imageAltZh: entry.titleZh,
     imageAltEn: entry.titleEn,
     featured: false,
     sourceUrlZh: sourceUrl,
     sourceUrlEn: sourceUrl,
     sourceRepo: '',
-    attribution: 'MeiGen',
-    externalSourceLabel: 'MeiGen',
-    externalSourceUrl: sourceUrl,
+    attribution: '',
+    externalSourceLabel: '',
+    externalSourceUrl: '',
+    hideSource: true,
     dimensions: '',
     license: 'Source attribution',
   };
