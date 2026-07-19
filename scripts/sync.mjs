@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { fetchGptImage2Skill } from './sources/gpt-image2-skill.mjs';
+import { meigenPortraitPrompts } from './sources/meigen-portraits.mjs';
 
 const SOURCE = 'https://www.heigeai.com/agent.json';
 const ROOT = process.cwd();
@@ -72,7 +73,7 @@ const MASTER_CATEGORY_BY_SOURCE = {
   'experimental':'experimental-creative',
 };
 const masterMetadata = new Map(MASTER_CATEGORIES.map((category) => [category.slug, category]));
-const prompts = [...heigePrompts, ...importedPrompts].map((prompt) => {
+const prompts = [...heigePrompts, ...importedPrompts, ...meigenPortraitPrompts].map((prompt) => {
   const masterSlug = MASTER_CATEGORY_BY_SOURCE[prompt.category] || 'experimental-creative';
   const master = masterMetadata.get(masterSlug);
   return { ...prompt, category: master.slug, categoryLabelZh: master.labelZh, categoryLabelEn: master.labelEn };
@@ -94,7 +95,7 @@ const dataset = {
   counts: {
     prompts: prompts.length,
     categories: categories.length,
-    sources: { heigeai: heigePrompts.length, gptImage2Skill: importedPrompts.length },
+    sources: { heigeai: heigePrompts.length, gptImage2Skill: importedPrompts.length, meigen: meigenPortraitPrompts.length },
   },
   categories,
   prompts,

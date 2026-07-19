@@ -2,7 +2,7 @@
 
 可搜索、可复制、可下载的中英双语 AI 生图提示词库，可部署到 Vercel 或 Cloudflare Pages。
 
-数据来自黑哥 AI 的公开机器接口，以及 `wuyoscar/GPT-Image2-Skill` 的分类 Gallery。外部作者案例保留原作者和来源信息；图片不存入本仓库，只引用原始地址。
+数据来自黑哥 AI 的公开机器接口、`wuyoscar/GPT-Image2-Skill` 的分类 Gallery，以及 MeiGen 的公开提示词页面。外部作者案例保留原作者和来源信息；图片不存入本仓库，只引用原始地址。
 
 ## 本地运行
 
