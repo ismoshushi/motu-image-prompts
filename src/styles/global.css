@@ -204,6 +204,23 @@ input:focus, select:focus { background: #fff; border-color: #f6a8c5; box-shadow:
 .block-title button:hover { background: var(--accent-dark); }
 .block-title a { color: #111; background: var(--accent); }
 .block-title a:hover { background: var(--accent-dark); }
+.copy-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 40;
+  padding: 11px 18px;
+  color: #fff;
+  background: rgba(27, 27, 29, 0.92);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.copy-toast.show { opacity: 1; transform: translate(-50%, 0); }
+:root[data-theme="dark"] .copy-toast { color: #111; background: var(--accent); }
 pre { white-space: pre-wrap; color: #45454b; font: 15px/1.85 inherit; }
 .source { color: var(--muted); overflow-wrap: anywhere; font-size: 13px; }
 .source a { color: var(--accent-dark); }
