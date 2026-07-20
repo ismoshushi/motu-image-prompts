@@ -198,8 +198,12 @@ input:focus, select:focus { background: #fff; border-color: #f6a8c5; box-shadow:
 .prompt-block { margin: 18px 0; padding: 24px; background: var(--soft); border: 1px solid var(--line); border-radius: 18px; }
 .block-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .block-title h2 { margin: 0; font-family: Poppins, Inter, sans-serif; font-size: 20px; }
-.block-title button { padding: 9px 15px; color: #fff; background: var(--text); border: 0; border-radius: 999px; font-weight: 700; cursor: pointer; }
+.block-actions { display: flex; align-items: center; gap: 8px; }
+.block-title button, .block-title a { padding: 9px 15px; border: 0; border-radius: 999px; font-weight: 700; cursor: pointer; text-decoration: none; }
+.block-title button { color: #fff; background: var(--text); }
 .block-title button:hover { background: var(--accent-dark); }
+.block-title a { color: #111; background: var(--accent); }
+.block-title a:hover { background: var(--accent-dark); }
 pre { white-space: pre-wrap; color: #45454b; font: 15px/1.85 inherit; }
 .source { color: var(--muted); overflow-wrap: anywhere; font-size: 13px; }
 .source a { color: var(--accent-dark); }

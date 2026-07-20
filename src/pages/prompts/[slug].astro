@@ -23,11 +23,23 @@ const showSource = !prompt.hideSource && !prompt.id?.startsWith('case-');
       </div>
     </div>
     {prompt.promptZh && <section class="prompt-block">
-      <div class="block-title"><h2>中文提示词</h2><button data-copy="zh">复制</button></div>
+      <div class="block-title">
+        <h2>中文提示词</h2>
+        <div class="block-actions">
+          <button data-copy="zh">复制</button>
+          <a href="https://gen.moshushi.xyz/" target="_blank" rel="noopener">去生成</a>
+        </div>
+      </div>
       <pre id="prompt-zh">{prompt.promptZh}</pre>
     </section>}
     {prompt.promptEn && <section class="prompt-block">
-      <div class="block-title"><h2>English prompt</h2><button data-copy="en">Copy</button></div>
+      <div class="block-title">
+        <h2>English prompt</h2>
+        <div class="block-actions">
+          <button data-copy="en">Copy</button>
+          <a href="https://gen.moshushi.xyz/" target="_blank" rel="noopener">去生成</a>
+        </div>
+      </div>
       <pre id="prompt-en">{prompt.promptEn}</pre>
     </section>}
     {showSource && prompt.attribution && <p class="source">归属：{prompt.attribution}</p>}
