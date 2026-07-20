@@ -27,7 +27,7 @@ const showSource = !prompt.hideSource && !prompt.id?.startsWith('case-');
         <h2>中文提示词</h2>
         <div class="block-actions">
           <button data-copy="zh">复制</button>
-          <a href="https://gen.moshushi.xyz/" target="_blank" rel="noopener" data-generate="zh">去生成</a>
+          <a href="https://gen.moshushi.xyz/" data-generate="zh">去生成</a>
         </div>
       </div>
       <pre id="prompt-zh">{prompt.promptZh}</pre>
@@ -37,7 +37,7 @@ const showSource = !prompt.hideSource && !prompt.id?.startsWith('case-');
         <h2>English prompt</h2>
         <div class="block-actions">
           <button data-copy="en">Copy</button>
-          <a href="https://gen.moshushi.xyz/" target="_blank" rel="noopener" data-generate="en">去生成</a>
+          <a href="https://gen.moshushi.xyz/" data-generate="en">去生成</a>
         </div>
       </div>
       <pre id="prompt-en">{prompt.promptEn}</pre>
@@ -65,11 +65,13 @@ const showSource = !prompt.hideSource && !prompt.id?.startsWith('case-');
     const toast = document.querySelector('#copy-toast');
     let toastTimer;
     for (const link of document.querySelectorAll('[data-generate]')) {
-      link.addEventListener('click', async () => {
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
         await copyPrompt(link.dataset.generate);
         toast.classList.add('show');
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+        setTimeout(() => window.location.href = link.href, 500);
       });
     }
   </script>
